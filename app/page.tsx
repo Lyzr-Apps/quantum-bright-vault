@@ -125,9 +125,11 @@ export default function HomePage() {
         throw new Error(data.error || 'Agent error')
       }
 
-      // Extract response text
+      // Extract response text from raw_response or response
       let botReply = ''
-      if (typeof data.response === 'string') {
+      if (data.raw_response) {
+        botReply = data.raw_response
+      } else if (typeof data.response === 'string') {
         botReply = data.response
       } else if (data.response?.answer) {
         botReply = data.response.answer
